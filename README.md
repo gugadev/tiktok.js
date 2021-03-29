@@ -2,6 +2,12 @@
 
 Get tiktok's info (music, video, author) and download audio and video!
 
+## Install (not published atm)
+
+```bsah
+npm install @gugadev/tiktok.js
+```
+
 ## How to use
 
 There are two main use cases: using the core library and using the react hook.
