@@ -59,25 +59,22 @@ import { useTiktok } from '@gugadev/tiktok.js'
 
 export const App = () => {
     const [url, setUrl] = useState('')
-    const [key, setKey] = useState(uuid())
-    const [shouldGetTiktok, setShouldGetTiktok] = useState(false)
-    const tiktok = useTiktok(url, key, { enabled: shouldGetTiktok })
+    const tiktok = useTiktok(url)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setUrl(e.target.value)
     }
 
     const processTiktok = () => {
-        setShouldGetTiktok(true)
-        setKey(uuid())
+        tiktok.get()
     }
 
     useEffect(() => {
         if (tiktok.info) {
             console.log('Tiktok info:', tiktok.info)
-            // console.log('Donwloading tiktok...')
+            // You can also:
             // tiktok.getVideo().then(() => {
-            //      // video will be downloaded automatically
+            //     // video will be downloaded automatically
             //     console.log('Video downloaded')
             // })
         }
@@ -118,3 +115,4 @@ The hook return an object with the following fields:
 - `isError`: if the tiktok failed.
 - `isDownloading`: if the tiktok is downloading (audio or video).
 - `error`: error in fail case.
+- `get`: method to start fetching the tiktok.
