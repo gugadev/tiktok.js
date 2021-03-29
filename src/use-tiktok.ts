@@ -36,19 +36,14 @@ export function useTiktok(url: string, proxy?: string) {
         setIsFetching(true)
         try {
             const data = await tiktok.process(url, proxy)
-            setIsFetching(false)
-            setIsSuccess(true)
-            setInfo(data.info)
 
             const _getAudio = async () => {
-                console.log('Executing getAudio')
                 setIsDownloading(true)
                 await data.getAudio()
                 setIsDownloading(false)
             }
 
             const _getVideo = async () => {
-                console.log('Executing getVideo')
                 setIsDownloading(true)
                 await data.getVideo()
                 setIsDownloading(false)
@@ -56,6 +51,9 @@ export function useTiktok(url: string, proxy?: string) {
 
             setGetAudio(() => _getAudio)
             setGetVideo(() => _getVideo)
+            setInfo(data.info)
+            setIsFetching(false)
+            setIsSuccess(true)
         } catch (e) {
             setIsFetching(false)
             setIsError(true)
