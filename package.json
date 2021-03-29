@@ -1,8 +1,9 @@
 {
   "name": "@gugadev/tiktok.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Get tiktok's info (music, video, author) and download audio and video!",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "jest --coverage --watchAll=false --coverageDirectory=coverage --detectOpenHandles",
     "test:single": "jest --watchAll=false --detectOpenHandles",
