@@ -1,6 +1,6 @@
 {
-  "name": "tiktok.js",
-  "version": "1.0.0",
+  "name": "@gugadev/tiktok.js",
+  "version": "0.1.0",
   "description": "Get tiktok's info (music, video, author) and download audio and video!",
   "main": "index.js",
   "scripts": {

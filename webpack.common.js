@@ -9,6 +9,7 @@ const paths = {
 
 module.exports = {
     entry: {
+        index: resolve(paths.source, 'index.ts'),
         tiktok: resolve(paths.source, 'tiktok.ts'),
         'use-tiktok': resolve(paths.source, 'use-tiktok.ts')
     },
