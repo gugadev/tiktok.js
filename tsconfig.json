@@ -35,5 +35,5 @@
         "example",
         "__mocks__/**/*.ts"
     ],
-    "exclude": ["node_modules", "dist", "src/**/*.spec.ts", "src/**/*.spec.tsx"]
+    "exclude": ["node_modules", "dist", "babel.config.js"]
 }
