@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "importHelpers": true,
+        "removeComments": true,
+        "target": "es5",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext",
+            "es2015",
+            "es2016",
+            "es2017",
+            "es2018"
+        ],
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmit": false,
+        "jsx": "react",
+        "baseUrl": "."
+    },
+    "include": [
+        "webpack.common.js",
+        "webpack.dev.js",
+        "webpack.prod.js",
+        "src",
+        "example",
+        "__mocks__/**/*.ts"
+    ],
+    "exclude": ["node_modules", "dist", "src/**/*.spec.ts", "src/**/*.spec.tsx"]
+}
