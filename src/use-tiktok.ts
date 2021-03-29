@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 import { tiktok, TiktokInfo } from 'src/tiktok'
-import { usePrevious } from 'src/use-previous'
 
+type VoidFunctionPromise = () => Promise<void>
 interface State {
     isFetching: boolean
     isSuccess: boolean
@@ -14,98 +14,64 @@ interface State {
     getAudio: () => Promise<void>
 }
 
-interface Options {
-    enabled?: boolean
-    proxy?: string
-}
+export function useTiktok(url: string, proxy?: string) {
+    // statuses
+    const [isFetching, setIsFetching] = useState(false)
+    const [isSuccess, setIsSuccess] = useState(false)
+    const [isError, setIsError] = useState(false)
+    const [isDownloading, setIsDownloading] = useState(false)
+    // error
+    const [error, setError] = useState<Error>()
+    // info
+    const [info, setInfo] = useState<TiktokInfo>()
+    // methods
+    const [getVideo, setGetVideo] = useState<VoidFunctionPromise>()
+    const [getAudio, setGetAudio] = useState<VoidFunctionPromise>()
 
-const defaultOptions: Options = {
-    enabled: true,
-    proxy: undefined
-}
+    /**
+     * Process the tiktok video thorugh core library
+     */
+    const processTiktok = async () => {
+        // eslint-disable-next-line prettier/prettier
+        setIsFetching(true)
+        try {
+            const data = await tiktok.process(url, proxy)
+            setIsFetching(false)
+            setIsSuccess(true)
+            setInfo(data.info)
 
-export function useTiktok(url: string, key: string, options = defaultOptions) {
-    const { enabled, proxy } = options
-    const previousKey = usePrevious(key)
-    const fetched = useRef(false)
-    const [state, setState] = useState<State>({
-        isFetching: false,
-        isSuccess: false,
-        isError: false,
-        isDownloading: false,
-        error: undefined,
-        info: undefined,
-        getVideo: () => Promise.resolve(),
-        getAudio: () => Promise.resolve()
-    })
+            const _getAudio = async () => {
+                console.log('Executing getAudio')
+                setIsDownloading(true)
+                await data.getAudio()
+                setIsDownloading(false)
+            }
 
-    const processTiktok = () => {
-        fetched.current = true
-        // start fetching
-        setState({
-            ...state,
-            isFetching: true
-        })
-        tiktok
-            .process(url, proxy)
-            .then(data => {
-                // stop fetching
-                setState({
-                    ...state,
-                    isFetching: false,
-                    isSuccess: true,
-                    info: data.info,
-                    // wrap getAudio to use state
-                    getAudio: async () => {
-                        setState({
-                            ...state,
-                            isDownloading: true
-                        })
-                        await data.getAudio()
-                        setState({
-                            ...state,
-                            isDownloading: false
-                        })
-                    },
-                    // wrap getVideo to use state
-                    getVideo: async () => {
-                        setState({
-                            ...state,
-                            isDownloading: true
-                        })
-                        await data.getVideo()
-                        setState({
-                            ...state,
-                            isDownloading: false
-                        })
-                    }
-                })
-            })
-            .catch(err => {
-                setState({
-                    ...state,
-                    isFetching: false,
-                    isError: true,
-                    error: err
-                })
-            })
+            const _getVideo = async () => {
+                console.log('Executing getVideo')
+                setIsDownloading(true)
+                await data.getVideo()
+                setIsDownloading(false)
+            }
+
+            setGetAudio(() => _getAudio)
+            setGetVideo(() => _getVideo)
+        } catch (e) {
+            setIsFetching(false)
+            setIsError(true)
+            setError(e)
+        }
     }
 
-    const isFirstTime = enabled && !fetched.current
-    const keyChanged = previousKey !== key
-
-    if (
-        enabled &&
-        fetched.current &&
-        keyChanged &&
-        !state.isFetching &&
-        !state.isDownloading
-    ) {
-        processTiktok()
+    return {
+        isFetching,
+        isDownloading,
+        isSuccess,
+        isError,
+        error,
+        info,
+        getAudio,
+        getVideo,
+        get: processTiktok
     }
-    if (isFirstTime) {
-        processTiktok()
-    }
-
-    return state
 }
