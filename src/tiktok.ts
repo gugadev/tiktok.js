@@ -51,6 +51,12 @@ export interface TiktokInfo {
     author: TiktokAuthorInfo
 }
 
+export interface TiktokReturn {
+    info: TiktokInfo
+    getAudio: () => Promise<void>
+    getVideo: () => Promise<void>
+}
+
 /**
  *  Tiktok audio and video downloader
  * @version 0.0.1
@@ -196,7 +202,7 @@ class Tiktok {
         }
     }
 
-    async process(url: string, proxy?: string) {
+    async process(url: string, proxy?: string): Promise<TiktokReturn> {
         if (proxy) {
             this.bypassCorsHeaders = proxy
         }

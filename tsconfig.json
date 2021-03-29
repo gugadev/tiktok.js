@@ -25,7 +25,8 @@
         "experimentalDecorators": true,
         "noEmit": false,
         "jsx": "react",
-        "baseUrl": "."
+        "baseUrl": ".",
+        "declaration": true
     },
     "include": [
         "webpack.common.js",
