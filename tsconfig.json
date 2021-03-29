@@ -31,9 +31,11 @@
         "webpack.common.js",
         "webpack.dev.js",
         "webpack.prod.js",
+        "jest.config.js",
+        "babel.config.js",
         "src",
         "example",
         "__mocks__/**/*.ts"
     ],
-    "exclude": ["node_modules", "dist", "babel.config.js"]
+    "exclude": ["node_modules", "dist"]
 }
