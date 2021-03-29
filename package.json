@@ -1,0 +1,62 @@
+{
+  "name": "tiktok.js",
+  "version": "1.0.0",
+  "description": "Get tiktok's info (music, video, author) and download audio and video!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage --watchAll=false --coverageDirectory=coverage",
+    "dev": "cross-env NODE_ENV=\"playground\" webpack serve --config webpack.dev.js",
+    "prod": "cross-env NODE_ENV=\"production\" webpack --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gugadev/tiktok.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gugadev/tiktok.js/issues"
+  },
+  "homepage": "https://github.com/gugadev/tiktok.js#readme",
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/react-hooks": "^3.7.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^25.2.2",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "jest": "^26.6.3",
+    "prettier": "^1.18.2",
+    "terser-webpack-plugin": "^5.1.1",
+    "ts-loader": "^8.1.0",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "tslib": "^2.1.0",
+    "typescript": "^4.1.2",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "@types/react-dom": "^17.0.3"
+  }
+}
