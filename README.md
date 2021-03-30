@@ -65,6 +65,14 @@ export const App = () => {
         setUrl(e.target.value)
     }
 
+    const donwload = () => {
+        if (tiktok.getVideo) {
+            tiktok.getVideo().then(() => {
+                console.log('Video downloaded')
+            })
+        }
+    }
+
     const processTiktok = () => {
         tiktok.get()
     }
@@ -72,11 +80,6 @@ export const App = () => {
     useEffect(() => {
         if (tiktok.info) {
             console.log('Tiktok info:', tiktok.info)
-            // You can also:
-            // tiktok.getVideo().then(() => {
-            //     // video will be downloaded automatically
-            //     console.log('Video downloaded')
-            // })
         }
     }, [tiktok.info])
 
@@ -86,6 +89,19 @@ export const App = () => {
         }
     }, [tiktok.error])
 
+    const getButtonText = () => {
+        if (tiktok.isFetching) {
+            return 'Fetching...'
+        }
+        if (tiktok.isDownloading) {
+            return 'Downloading...'
+        }
+        if (tiktok.isSuccess) {
+            return 'Download'
+        }
+        return 'Get'
+    }
+
     return (
         <div className="downloadForm">
             <div className="downloadForm__container">
@@ -94,11 +110,12 @@ export const App = () => {
                     value={url}
                     onChange={handleChange}
                 />
-                <DownloadButton
-                    onClick={processTiktok}
-                    isFetching={tiktok.isFetching}
-                    isDownloading={tiktok.isDownloading}
-                />
+                <button
+                    onClick={tiktok.isSuccess ? downloadVideo : processTiktok}
+                    disabled={url.length === 0}
+                >
+                    { getButtonText() }
+                </button>
             </div>
         </div>
     )
