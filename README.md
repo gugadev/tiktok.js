@@ -2,7 +2,7 @@
 
 Get tiktok's info (music, video, author) and download audio and video!
 
-## [Live demo](https://codesandbox.io/s/gugadevtiktokjs-demo-b1y5w?file=/src/download-button.tsx)
+## [Live demo](https://codesandbox.io/s/gugadevtiktokjs-demo-b1y5w)
 
 ---
 
