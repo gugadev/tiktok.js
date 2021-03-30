@@ -14,6 +14,14 @@ export const DownloadForm = () => {
         setUrl(e.target.value)
     }
 
+    const download = () => {
+        if (tiktok.getVideo) {
+            tiktok.getVideo().then(() => {
+                console.log('Video downloaded')
+            })
+        }
+    }
+
     useEffect(() => {
         if (tiktok.info) {
             console.log('Tiktok info:', tiktok.info)
@@ -26,7 +34,10 @@ export const DownloadForm = () => {
 
     useEffect(() => {
         if (tiktok.error) {
-            console.warn('No se pudo obtener tiktok:', tiktok.error)
+            console.warn(
+                'Something went wrong when fetch the tiktok:',
+                tiktok.error
+            )
         }
     }, [tiktok.error])
 
@@ -35,9 +46,11 @@ export const DownloadForm = () => {
             <div className="downloadForm__container">
                 <input type="text" value={url} onChange={handleChange} />
                 <DownloadButton
-                    onClick={tiktok.get}
+                    onClick={tiktok.isSuccess ? download : tiktok.get}
                     isFetching={tiktok.isFetching}
                     isDownloading={tiktok.isDownloading}
+                    isSuccess={tiktok.isSuccess}
+                    isFormEmpty={url.length === 0}
                 />
             </div>
         </form>
