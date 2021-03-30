@@ -2,7 +2,11 @@
 
 Get tiktok's info (music, video, author) and download audio and video!
 
-## Install
+## [Live demo](https://codesandbox.io/s/gugadevtiktokjs-demo-b1y5w?file=/src/download-button.tsx)
+
+---
+
+## Install
 
 ```bsah
 npm install @gugadev/tiktok.js
